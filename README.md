@@ -23,6 +23,13 @@ These configuration tables are referred to as lists in the utility. A list can b
 ### Pipeline component
 Install the [Nuget package](https://github.com/BizTalkComponents/LookupUtility/releases) in your pipeline component project.
 
+The following code gets the configuration value from the MyList list with the key ConfigKey.
+
+```cs
+var lookupService = new LookupUtilityService();
+var val = lookupService.GetValue("MyList", "ConfigKey");
+```
+
 ### BizTalk map
 Make sure that the utility is [installed](#Installation) in the GAC.
 The easiest way to to this is to download and install the [MSI](https://github.com/BizTalkComponents/LookupUtility/releases) 
@@ -58,6 +65,9 @@ If you want to throw an exception if the specified key does not exist you can us
 
 The utility needs to be installed in the GAC on all BizTalk Servers where the utility is used.
 The easiest way to to this is to download and install the [MSI](https://github.com/BizTalkComponents/LookupUtility/releases) 
+
+Connection information to the storage should typically be placed in BizTalks configuration file.
+The Sharepoint repository looks for the config key SharePointSite
 
 
 ## Sharepoint
