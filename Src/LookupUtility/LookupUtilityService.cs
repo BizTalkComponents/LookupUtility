@@ -1,43 +1,19 @@
-﻿using System;
+﻿using BizTalkComponents.Utilities.LookupUtility.Repository;
+using System;
 using System.Collections.Generic;
-using System.Configuration;
 
 namespace BizTalkComponents.Utilities.LookupUtility
 {
     public class LookupUtilityService
     {
-
         private ILookupRepository _lookupRepository;
-        private LookupHelper _lookupHelper;
-        private IConfiguration _configuration;
-
-        public LookupUtilityService()
-        {
-
-        }
-
-        public IConfiguration Config
-        {
-            get
-            {
-                if (_configuration == null)
-                {
-                    _configuration = new LookupConfig();
-                }
-
-                return _configuration;
-            }
-            set
-            {
-                _configuration = value;
-            }
-        }
+        private readonly Dictionary<string, Dictionary<string, string>> _lookupValues = new Dictionary<string, Dictionary<string, string>>();
 
         public LookupUtilityService(ILookupRepository lookupRepository)
         {
-            if (lookupRepository == null)
+            if(lookupRepository == null)
             {
-                throw new InvalidOperationException("Lookup repository was not correctly set");
+                throw new InvalidOperationException("LookupRepository is not set.");
             }
 
             _lookupRepository = lookupRepository;
@@ -45,28 +21,29 @@ namespace BizTalkComponents.Utilities.LookupUtility
 
         public string GetValue(string list, string key, bool throwIfNotExists = false)
         {
-            if (_lookupRepository == null)
+            if (!_lookupValues.TryGetValue(list, out Dictionary<string, string> dict))
             {
-                _lookupRepository = ResolveRepository();
-            }
-            if (_lookupHelper == null)
-            {
-                _lookupHelper = new LookupHelper(_lookupRepository);
+                dict = _lookupRepository.LoadList(list);
+
+                if (dict == null)
+                {
+                    throw new ArgumentException("The list {0} does not exist.", list);
+                }
+
+                _lookupValues.Add(list, dict);
             }
 
-            return _lookupHelper.GetValue(list, key, throwIfNotExists);
-        }
+            if (!dict.TryGetValue(key, out string val))
+            {
+                if (throwIfNotExists)
+                {
+                    throw new ArgumentException(string.Format("The specified property {0} does not exist in list {1}", key, list));
+                }
 
-        private ILookupRepository ResolveRepository()
-        {
-            if (_configuration.UseLookupMock())
-            {
-                return new LookupRepositoryMock();
+                return null;
             }
-            else
-            {
-                return new SharepointLookupRepository();
-            }
+
+            return val;
         }
     }
 }

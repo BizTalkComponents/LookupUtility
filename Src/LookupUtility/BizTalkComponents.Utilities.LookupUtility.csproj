@@ -54,14 +54,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IConfiguration.cs" />
-    <Compile Include="ILookupRepository.cs" />
-    <Compile Include="LookupConfig.cs" />
-    <Compile Include="LookupHelper.cs" />
-    <Compile Include="LookupRepositoryMock.cs" />
+    <Compile Include="Application\IApplicationService.cs" />
+    <Compile Include="Application\SharePointApplicationService.cs" />
+    <Compile Include="Repository\ILookupRepository.cs" />
+    <Compile Include="Repository\LookupRepositoryMock.cs" />
     <Compile Include="LookupUtilityService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SharepointLookupRepository.cs" />
+    <Compile Include="Repository\SharepointLookupRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="BizTalkComponents.Utilities.LookupUtility.nuspec" />
