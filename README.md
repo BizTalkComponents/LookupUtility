@@ -24,7 +24,7 @@ These configuration tables are referred to as lists in the utility. A list can b
 Install the [Nuget package](https://github.com/BizTalkComponents/LookupUtility/releases) in your pipeline component project.
 
 ### BizTalk map
-Make sure that the utility is [installed](##Installation) in the GAC.
+Make sure that the utility is [installed](#Installation) in the GAC.
 The easiest way to to this is to download and install the [MSI](https://github.com/BizTalkComponents/LookupUtility/releases) 
 
 You also need to [reference](https://blog.sandro-pereira.com/2012/07/29/biztalk-mapper-patterns-calling-an-external-assembly-from-custom-xslt-in-biztalk-server-2010/) the utility dll from your BizTalk map.
