@@ -1,4 +1,4 @@
-﻿namespace Shared.Utilities.LookupUtility
+﻿namespace BizTalkComponents.Utilities.LookupUtility
 {
     public interface IConfiguration
     {

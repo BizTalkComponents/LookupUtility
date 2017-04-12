@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Shared.Utilities.LookupUtility
+namespace BizTalkComponents.Utilities.LookupUtility
 {
     public class LookupRepositoryMock : ILookupRepository
     {

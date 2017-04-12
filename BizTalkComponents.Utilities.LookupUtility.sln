@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26228.10
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.Utilities.LookupUtility", "Src\LookupUtility\Shared.Utilities.LookupUtility.csproj", "{550F86DB-7247-45B0-814D-66351BF627C2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BizTalkComponents.Utilities.LookupUtility", "Src\LookupUtility\BizTalkComponents.Utilities.LookupUtility.csproj", "{550F86DB-7247-45B0-814D-66351BF627C2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.Utilities.LookupUtility.Test.UnitTest", "Test\UnitTest\Shared.Utilities.LookupUtility.Test.UnitTest.csproj", "{420B9C46-F9D5-4A5D-B622-FAE5668F6F16}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BizTalkComponents.Utilities.LookupUtility.Test.UnitTest", "Test\UnitTest\BizTalkComponents.Utilities.LookupUtility.Test.UnitTest.csproj", "{420B9C46-F9D5-4A5D-B622-FAE5668F6F16}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

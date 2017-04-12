@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 
-namespace Shared.Utilities.LookupUtility
+namespace BizTalkComponents.Utilities.LookupUtility
 {
     public class LookupUtilityService
     {

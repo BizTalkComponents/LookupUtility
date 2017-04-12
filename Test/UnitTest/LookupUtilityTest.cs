@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System.Collections.Generic;
 
-namespace Shared.Utilities.LookupUtility.Test.UnitTest
+namespace BizTalkComponents.Utilities.LookupUtility.Test.UnitTest
 {
     [TestClass]
     public class LookupUtilityTest
