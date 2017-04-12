@@ -33,13 +33,16 @@ The extension object xml should look like this.
 ```xml
 <ExtensionObjects>
   <ExtensionObject Namespace="http://schemas.microsoft.com/BizTalk/2003/ScriptNS0" 
-    AssemblyName="BizTalkComponents.Utilities.LookupUtility, Version=1.0.0.0, Culture=neutral, PublicKeyToken=2a501ae5622b3926" ClassName="BizTalkComponents.Utilities.LookupUtility.LookupUtilityService" />
+    AssemblyName="BizTalkComponents.Utilities.LookupUtility, Version=1.0.0.0, Culture=neutral, 
+        PublicKeyToken=2a501ae5622b3926" 
+    ClassName="BizTalkComponents.Utilities.LookupUtility.LookupUtilityService" />
 </ExtensionObjects>
 ````
 In Xslt you can then call the utility using the GetValue method with a parameter for list and key.
 
 ```xml
-<xsl:variable name="result" xmlns:ScriptNS0="http://schemas.microsoft.com/BizTalk/2003/ScriptNS0" select="ScriptNS0:GetValue(list, key))" />
+<xsl:variable name="result" xmlns:ScriptNS0="http://schemas.microsoft.com/BizTalk/2003/ScriptNS0" 
+    select="ScriptNS0:GetValue(list, key))" />
 ```
 
 The utility will return null for any non existing key and throw an exception if the specified list does not exist.
@@ -47,7 +50,8 @@ The utility will return null for any non existing key and throw an exception if 
 If you want to throw an exception if the specified key does not exist you can use the following call.
 
 ```xml
-<xsl:variable name="result" xmlns:ScriptNS0="http://schemas.microsoft.com/BizTalk/2003/ScriptNS0" select="ScriptNS0:GetValue(list, key, true))" />
+<xsl:variable name="result" xmlns:ScriptNS0="http://schemas.microsoft.com/BizTalk/2003/ScriptNS0" 
+    select="ScriptNS0:GetValue(list, key, true))" />
 ```
 
 ## Installation
