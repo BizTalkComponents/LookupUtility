@@ -23,7 +23,7 @@ These configuration tables are referred to as lists in the utility. A list can b
 ### Pipeline component
 Install the [Nuget package](https://github.com/BizTalkComponents/LookupUtility/releases) in your pipeline component project.
 
-The following code gets the configuration value from the MyList list with the key ConfigKey.
+The following code gets the configuration value from the _MyList_ list with the key _ConfigKey_.
 
 ```cs
 var lookupService = new LookupUtilityService();
@@ -47,18 +47,18 @@ The extension object xml should look like this.
 ````
 In Xslt you can then call the utility using the GetValue method with a parameter for list and key.
 
-```xml
+```xsl
 <xsl:variable name="result" xmlns:ScriptNS0="http://schemas.microsoft.com/BizTalk/2003/ScriptNS0" 
-    select="ScriptNS0:GetValue(list, key))" />
+    select="ScriptNS0:GetValue('list', 'key'))" />
 ```
 
 The utility will return null for any non existing key and throw an exception if the specified list does not exist.
 
 If you want to throw an exception if the specified key does not exist you can use the following call.
 
-```xml
+```xsl
 <xsl:variable name="result" xmlns:ScriptNS0="http://schemas.microsoft.com/BizTalk/2003/ScriptNS0" 
-    select="ScriptNS0:GetValue(list, key, true))" />
+    select="ScriptNS0:GetValue('list', 'key', true))" />
 ```
 
 ## Installation
@@ -67,8 +67,12 @@ The utility needs to be installed in the GAC on all BizTalk Servers where the ut
 The easiest way to to this is to download and install the [MSI](https://github.com/BizTalkComponents/LookupUtility/releases) 
 
 Connection information to the storage should typically be placed in BizTalks configuration file.
-The Sharepoint repository looks for the config key SharePointSite
-
+The Sharepoint repository looks for the config key _SharePointSite_
+```xml
+<appSettings>
+    <add key="SharePointSite" value="http://server/listdirectory"/>
+</appSettings>
+```
 
 ## Sharepoint
 LookupUtility is shipped with a lookup repository for reading configuration data from Sharepoint lists.
