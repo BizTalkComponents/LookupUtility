@@ -58,6 +58,7 @@
     <Compile Include="SharepointLookupRepository.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="BizTalkComponents.Utilities.LookupUtility.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
