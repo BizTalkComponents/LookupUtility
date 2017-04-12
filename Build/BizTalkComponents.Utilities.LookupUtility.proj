@@ -1,6 +1,5 @@
 <Project DefaultTargets="GenerateMsi" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 	<Import Project="$(MSBuildExtensionsPath)\BtsMsiTask\BtsMsiTask.targets" />
-  <Import Project="$(MSBuildExtensionsPath)\ExtensionPack\4.0\MSBuild.ExtensionPack.tasks"/>
   
 	<PropertyGroup>
 		<DestinationPath>.</DestinationPath>
@@ -11,15 +10,10 @@
 	
 		<Resource Include="..\Src\LookupUtility\bin\debug\BizTalkComponents.Utilities.LookupUtility.dll" />
   </ItemGroup>
-  <Target Name="GetVersion">
-    <MSBuild.ExtensionPack.Framework.Assembly TaskAction="GetInfo" NetAssembly="..\Src\LookupUtility\bin\debug\BizTalkComponents.Utilities.LookupUtility.dll">
-      <Output TaskParameter="OutputItems" ItemName="Info"/>
-    </MSBuild.ExtensionPack.Framework.Assembly>
-  </Target>
-
-  <Target Name="GenerateMsi" DependsOnTargets="GetVersion">
+  
+  <Target Name="GenerateMsi">
     <MsiTask
-			FileName="BizTalkComponents.Utilities.LookupUtility%(Info.AssemblyInformationalVersion).msi"
+			FileName="BizTalkComponents.Utilities.LookupUtility1.0.0.0.msi"
 			DestinationPath="$(DestinationPath)"
 			ApplicationName="$(ApplicationName)"
 			SourceLocation="C:\%(Info.AssemblyInformationalVersion)"
