@@ -21,7 +21,7 @@ These configuration tables are referred to as lists in the utility. A list can b
 ## Using the utility
 
 ### Pipeline component
-Install the [Nuget package](https://github.com/BizTalkComponents/LookupUtility/releases) in your pipeline component project.
+Install the [Nuget package](https://www.nuget.org/packages/BizTalkComponents.Utilities.LookupUtility/) in your pipeline component project.
 
 The configuration properties are accessed through the _LookupUtilityService_.
 The  _LookupUtilityService_ should be initialized with a repository for the specific configuration store in used. For Sharepoint use:
