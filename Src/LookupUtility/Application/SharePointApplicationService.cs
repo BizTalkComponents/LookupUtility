@@ -14,8 +14,9 @@ namespace BizTalkComponents.Utilities.LookupUtility.Application
         
         public SharePointApplicationService()
         {
-            bool isBizTalk = Process.GetCurrentProcess()
-                                .ProcessName.ToLower().Contains("btsntsvc.exe");
+            //Todo: Check if code is run from Visual Studio or BizTalk.
+            //bool isBizTalk = Process.GetCurrentProcess()
+            //                    .ProcessName.ToLower().Contains("btsntsvc.exe");
             //if(isBizTalk)
             //{ 
             svc = new LookupUtilityService(new SharepointLookupRepository());
