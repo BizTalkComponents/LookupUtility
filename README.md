@@ -1,7 +1,7 @@
 # LookupUtility
 > Generic utility for translating values in a BizTalk transform.
 
-As with any other type of programming, hard coding configuration data in a BizTalk solution should be avoided. This helper library aims to enable integrations to read configuration data in a consistent manner.
+Utility to handle lookup of configuration values from BizTalk maps and BizTalk pipeline components.
 
 The lookup utlity is not dependant on any specific configuration store but makes certain assumptions about the structure of how the configuration data can be accessed.
 
@@ -23,11 +23,24 @@ These configuration tables are referred to as lists in the utility. A list can b
 ### Pipeline component
 Install the [Nuget package](https://github.com/BizTalkComponents/LookupUtility/releases) in your pipeline component project.
 
+The configuration properties are accessed through the _LookupUtilityService_.
+The  _LookupUtilityService_ should be initialized with a repository for the specific configuration store in used. For Sharepoint use:
+
+```cs
+var lookupService = new LookupUtilityService(new SharepointLookupRepository());
+```
+
 The following code gets the configuration value from the _MyList_ list with the key _ConfigKey_.
 
 ```cs
-var lookupService = new LookupUtilityService();
 var val = lookupService.GetValue("MyList", "ConfigKey");
+```
+
+If the list _MyList_ does not exist a ArgumentException will be thrown. If _ConfigKey_ does not exist, val will be set to null.
+If an exception should be thrown if the key does not exist that is possible through:
+
+```cs
+var val = lookupService.GetValue("MyList", "ConfigKey", true);
 ```
 
 ### BizTalk map
@@ -36,15 +49,19 @@ The easiest way to to this is to download and install the [MSI](https://github.c
 
 You also need to [reference](https://blog.sandro-pereira.com/2012/07/29/biztalk-mapper-patterns-calling-an-external-assembly-from-custom-xslt-in-biztalk-server-2010/) the utility dll from your BizTalk map.
 
-The extension object xml should look like this.
+Since we are not able to initialize the LookupService with the constructor that takes the repository as a parameter we need to use an ApplicationService specific to our configuration store.
+
+The extension object xml for Sharepoint would look like this.
 ```xml
 <ExtensionObjects>
   <ExtensionObject Namespace="http://schemas.microsoft.com/BizTalk/2003/ScriptNS0" 
     AssemblyName="BizTalkComponents.Utilities.LookupUtility, Version=1.0.0.0, Culture=neutral, 
         PublicKeyToken=2a501ae5622b3926" 
-    ClassName="BizTalkComponents.Utilities.LookupUtility.LookupUtilityService" />
+    ClassName="BizTalkComponents.Utilities.LookupUtility.Application.SharePointApplicationService" />
 </ExtensionObjects>
 ````
+
+
 In Xslt you can then call the utility using the GetValue method with a parameter for list and key.
 
 ```xsl
@@ -75,4 +92,4 @@ The Sharepoint repository looks for the config key _SharePointSite_
 ```
 
 ## Sharepoint
-LookupUtility is shipped with a lookup repository for reading configuration data from Sharepoint lists.
+LookupUtility is shipped with a lookup repository for reading configuration data from Sharepoint lists. It is important that the configuration data is stored in a list with a unique name and that it contains a field called key and a field called value. The values in the key field must be unique to the list.
