@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System.Collections.Generic;
+using BizTalkComponents.Utilities.LookupUtility.Repository;
 
 namespace BizTalkComponents.Utilities.LookupUtility.Test.UnitTest
 {
@@ -26,7 +27,7 @@ namespace BizTalkComponents.Utilities.LookupUtility.Test.UnitTest
 
         [TestMethod]
         public void TestHappyPath()
-        {
+            {
             Assert.AreEqual("ConfigValue", util.GetValue(list, "ConfigKey"));
             mock.Verify(util => util.LoadList(list), Times.Once);
         }
