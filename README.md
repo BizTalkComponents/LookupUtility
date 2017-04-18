@@ -93,3 +93,11 @@ The Sharepoint repository looks for the config key _SharePointSite_
 
 ## Sharepoint
 LookupUtility is shipped with a lookup repository for reading configuration data from Sharepoint lists. It is important that the configuration data is stored in a list with a unique name and that it contains a field called key and a field called value. The values in the key field must be unique to the list.
+
+## Composite keys
+In some scenarios multiple keys are needed to make a unique row. The utility is agnostic of how keys are structured but the suggested way is to combine keys with a separator between them, i.e.
+
+| Key | Value | Description                      |
+|-----|-------|----------------------------------|
+| Key1:Key2 | ABC   | Human readable description |
+| Key1:Key3 | DEF   | Human readable description |
