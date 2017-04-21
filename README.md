@@ -78,6 +78,23 @@ If you want to throw an exception if the specified key does not exist you can us
     select="ScriptNS0:GetValue('list', 'key', true))" />
 ```
 
+## Default values
+Besides returning null or throwing an exception when a requested key does not exist the utility can return default values.
+A default value can be specified at the configuration store by creating a key called _default_ with the default value as value.
+The utility will look for the default key if the specified key does not exists and if checking for default values are enabled in the map/pipeline component. This is accomplished by setting allowDefaults = true in the GetValue method.
+
+```xsl
+<xsl:variable name="result" xmlns:ScriptNS0="http://schemas.microsoft.com/BizTalk/2003/ScriptNS0" 
+    select="ScriptNS0:GetValue('list', 'key', false, true))" />
+```
+
+Default values can also be defined directly in the map/pipline component by using an overloaded version of GetValue
+
+```xsl
+<xsl:variable name="result" xmlns:ScriptNS0="http://schemas.microsoft.com/BizTalk/2003/ScriptNS0" 
+    select="ScriptNS0:GetValue('list', 'key', 'default value'))" />
+```
+
 ## Installation
 
 The utility needs to be installed in the GAC on all BizTalk Servers where the utility is used.
