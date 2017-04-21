@@ -46,9 +46,21 @@ namespace BizTalkComponents.Utilities.LookupUtility.Test.UnitTest
         }
 
         [TestMethod]
-        public void TestDefaultValue()
+        public void TestListDefaultValue()
         {
             Assert.AreEqual("DefaultValue", util.GetValue(list, "NonExistingConfigKey",false,true));
+        }
+
+        [TestMethod]
+        public void TestNonExistingWithDefaultValue()
+        {
+            Assert.AreEqual("DefaultValue", util.GetValue(list, "NonExistingConfigKey","DefaultValue"));
+        }
+
+        [TestMethod]
+        public void TestExistingWithDefaultValue()
+        {
+            Assert.AreEqual("ConfigValue", util.GetValue(list, "ConfigKey", "DefaultValue"));
         }
 
         [TestMethod]

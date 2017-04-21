@@ -30,5 +30,10 @@ namespace BizTalkComponents.Utilities.LookupUtility.Application
         {
             return svc.GetValue(list, key, throwIfNotExists, allowDefaults);
         }
+
+        public string GetValue(string list, string key, string defaultValue)
+        {
+            return svc.GetValue(list, key, defaultValue);
+        }
     }
 }

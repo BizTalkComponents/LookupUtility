@@ -20,19 +20,21 @@ namespace BizTalkComponents.Utilities.LookupUtility
             _lookupRepository = lookupRepository;
         }
 
+        public string GetValue(string list, string key, string defaultValue)
+        {
+            var dict = GetList(list);
+
+            if (!dict.TryGetValue(key, out string val))
+            {
+                return defaultValue;
+            }
+
+            return val;
+        }
+
         public string GetValue(string list, string key, bool throwIfNotExists = false, bool allowDefaults = false)
         {
-            if (!_lookupValues.TryGetValue(list, out Dictionary<string, string> dict))
-            {
-                dict = _lookupRepository.LoadList(list);
-
-                if (dict == null)
-                {
-                    throw new ArgumentException("The list {0} does not exist.", list);
-                }
-
-                _lookupValues.Add(list, dict);
-            }
+            var dict = GetList(list);
 
             if (!dict.TryGetValue(key, out string val))
             {
@@ -50,6 +52,25 @@ namespace BizTalkComponents.Utilities.LookupUtility
             }
 
             return val;
+        }
+
+        private Dictionary<string, string> GetList(string list)
+        {
+            var dict = new Dictionary<string, string>();
+
+            if (!_lookupValues.TryGetValue(list, out dict))
+            {
+                dict = _lookupRepository.LoadList(list);
+
+                if (dict == null)
+                {
+                    throw new ArgumentException("The list {0} does not exist.", list);
+                }
+
+                _lookupValues.Add(list, dict);
+            }
+
+            return dict;
         }
     }
 }
