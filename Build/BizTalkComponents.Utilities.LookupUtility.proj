@@ -13,7 +13,7 @@
   
   <Target Name="GenerateMsi">
     <MsiTask
-			FileName="BizTalkComponents.Utilities.LookupUtility1.0.1.0.msi"
+			FileName="BizTalkComponents.Utilities.LookupUtility1.0.2.0.msi"
 			DestinationPath="$(DestinationPath)"
 			ApplicationName="$(ApplicationName)"
 			SourceLocation="C:\%(Info.AssemblyInformationalVersion)"
