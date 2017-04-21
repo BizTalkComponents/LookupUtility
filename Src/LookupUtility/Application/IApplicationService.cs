@@ -8,6 +8,6 @@ namespace BizTalkComponents.Utilities.LookupUtility.Application
 {
     interface IApplicationService
     {
-        string GetValue(string list, string key, bool throwIfNotExists = false);
+        string GetValue(string list, string key, bool throwIfNotExists = false, bool allowDefaults = false);
     }
 }

@@ -26,9 +26,9 @@ namespace BizTalkComponents.Utilities.LookupUtility.Application
             //svc = new LookupUtilityService(new LookupRepositoryMock());
             //}
         }
-        public string GetValue(string list, string key, bool throwIfNotExists = false)
+        public string GetValue(string list, string key, bool throwIfNotExists = false, bool allowDefaults = false)
         {
-            return svc.GetValue(list, key, throwIfNotExists);
+            return svc.GetValue(list, key, throwIfNotExists, allowDefaults);
         }
     }
 }

@@ -21,7 +21,7 @@ namespace BizTalkComponents.Utilities.LookupUtility.Test.UnitTest
             util = new LookupUtilityService(mock.Object);
             var dictionary = new Dictionary<string, string>();
             dictionary.Add("ConfigKey", "ConfigValue");
-
+            dictionary.Add("default", "DefaultValue");
             mock.Setup(s => s.LoadList(list)).Returns(dictionary);
         }
 
@@ -43,6 +43,12 @@ namespace BizTalkComponents.Utilities.LookupUtility.Test.UnitTest
         public void TestNonExistingWithoutException()
         {
             Assert.AreEqual(null, util.GetValue(list, "NonExistingConfigKey"));
+        }
+
+        [TestMethod]
+        public void TestDefaultValue()
+        {
+            Assert.AreEqual("DefaultValue", util.GetValue(list, "NonExistingConfigKey",false,true));
         }
 
         [TestMethod]

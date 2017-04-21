@@ -8,6 +8,7 @@ namespace BizTalkComponents.Utilities.LookupUtility
     {
         private ILookupRepository _lookupRepository;
         private readonly Dictionary<string, Dictionary<string, string>> _lookupValues = new Dictionary<string, Dictionary<string, string>>();
+        private const string DEFAULT_KEY = "default";
 
         public LookupUtilityService(ILookupRepository lookupRepository)
         {
@@ -19,7 +20,7 @@ namespace BizTalkComponents.Utilities.LookupUtility
             _lookupRepository = lookupRepository;
         }
 
-        public string GetValue(string list, string key, bool throwIfNotExists = false)
+        public string GetValue(string list, string key, bool throwIfNotExists = false, bool allowDefaults = false)
         {
             if (!_lookupValues.TryGetValue(list, out Dictionary<string, string> dict))
             {
@@ -38,6 +39,11 @@ namespace BizTalkComponents.Utilities.LookupUtility
                 if (throwIfNotExists)
                 {
                     throw new ArgumentException(string.Format("The specified property {0} does not exist in list {1}", key, list));
+                }
+
+                if (allowDefaults && dict.TryGetValue(DEFAULT_KEY, out string defaultValue))
+                {
+                    return defaultValue;
                 }
 
                 return null;
