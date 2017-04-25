@@ -10,8 +10,8 @@ namespace BizTalkComponents.Utilities.LookupUtility.Application
 {
     public class SharePointApplicationService : IApplicationService
     {
-        private LookupUtilityService svc; 
-        
+        private LookupUtilityService svc;
+
         public SharePointApplicationService()
         {
             //Todo: Check if code is run from Visual Studio or BizTalk.
@@ -28,12 +28,36 @@ namespace BizTalkComponents.Utilities.LookupUtility.Application
         }
         public string GetValue(string list, string key, bool throwIfNotExists = false, bool allowDefaults = false)
         {
-            return svc.GetValue(list, key, throwIfNotExists, allowDefaults);
+            string value;
+
+            try
+            {
+                value = svc.GetValue(list, key, throwIfNotExists, allowDefaults);
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine(string.Format("An exception was thrown in LookupUtility {0}", ex.ToString()));
+                throw ex;
+            }
+
+            return value;
         }
 
         public string GetValue(string list, string key, string defaultValue)
         {
-            return svc.GetValue(list, key, defaultValue);
+            string value;
+
+            try
+            {
+                value = svc.GetValue(list, key, defaultValue);
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine(string.Format("An exception was thrown in LookupUtility {0}", ex.ToString()));
+                throw ex;
+            }
+
+            return value;
         }
     }
 }
