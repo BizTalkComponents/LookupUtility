@@ -7,8 +7,9 @@
     <Configuration></Configuration>
 	</PropertyGroup>
 	<ItemGroup>
-	
-		<Resource Include="..\Src\LookupUtility\bin\debug\BizTalkComponents.Utilities.LookupUtility.dll" />
+	<Resource Include="..\packages\Microsoft.SharePoint.Client.14.0.4762.1000\lib\Microsoft.SharePoint.Client.dll" />
+<Resource Include="..\packages\Microsoft.SharePoint.Client.14.0.4762.1000\lib\Microsoft.SharePoint.Client.Runtime.dll" />	
+	<Resource Include="..\Src\LookupUtility\bin\debug\BizTalkComponents.Utilities.LookupUtility.dll" />
   </ItemGroup>
   
   <Target Name="GenerateMsi">
