@@ -37,7 +37,7 @@ namespace BizTalkComponents.Utilities.LookupUtility.Repository
                 item.FieldValues.TryGetValue("Key", out object keyName);
                 item.FieldValues.TryGetValue("Value", out object valueName);
 
-                dictionary.Add(keyName.ToString(), valueName.ToString());
+                dictionary.Add(keyName.ToString(), valueName as string);
             }
 
             return dictionary;
