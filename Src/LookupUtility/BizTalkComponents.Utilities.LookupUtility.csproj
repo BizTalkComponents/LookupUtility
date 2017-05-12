@@ -56,11 +56,13 @@
   <ItemGroup>
     <Compile Include="Application\IApplicationService.cs" />
     <Compile Include="Application\SharePointApplicationService.cs" />
+    <Compile Include="Application\SqlApplicationService.cs" />
     <Compile Include="Repository\ILookupRepository.cs" />
     <Compile Include="Repository\LookupRepositoryMock.cs" />
     <Compile Include="LookupUtilityService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\SharepointLookupRepository.cs" />
+    <Compile Include="Repository\SqlLookupRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="BizTalkComponents.Utilities.LookupUtility.nuspec" />
