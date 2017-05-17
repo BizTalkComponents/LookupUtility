@@ -12,12 +12,12 @@ namespace BizTalkComponents.Utilities.LookupUtility.Repository
     {
         public Dictionary<string, string> LoadList(string list)
         {
-            string query = string.Format("SELECT Key, Value FROM {0}", list);
+            string query = string.Format("SELECT [Key], Value FROM {0}", list);
 
             var connectionString = ConfigurationManager.ConnectionStrings["SqlLookupRepository"].ConnectionString;
             var dictionary = new Dictionary<string, string>();
 
-            using (var con = new SqlConnection())
+            using (var con = new SqlConnection(connectionString))
             {
                 con.Open();
                 using (var cmd = new SqlCommand(query, con))

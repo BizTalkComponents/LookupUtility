@@ -32,10 +32,12 @@ namespace BizTalkComponents.Utilities.LookupUtility.Repository
 
             var dictionary = new Dictionary<string, string>();
 
+            object keyName;
+            object valueName;
             foreach (var item in collListItem)
             {
-                item.FieldValues.TryGetValue("Key", out object keyName);
-                item.FieldValues.TryGetValue("Value", out object valueName);
+                item.FieldValues.TryGetValue("Key", out keyName);
+                item.FieldValues.TryGetValue("Value", out valueName);
 
                 dictionary.Add(keyName.ToString(), valueName as string);
             }
