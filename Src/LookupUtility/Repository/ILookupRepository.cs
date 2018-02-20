@@ -8,6 +8,6 @@ namespace BizTalkComponents.Utilities.LookupUtility.Repository
 {
     public interface ILookupRepository
     {
-        Dictionary<string, string> LoadList(string list);
+        Dictionary<string, string> LoadList(string list, TimeSpan maxAge = default(TimeSpan));
     }
 }
