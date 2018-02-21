@@ -16,7 +16,6 @@ namespace BizTalkComponents.Utilities.LookupUtility.Test.UnitTest
         [ClassInitialize]
         public static void Init(TestContext context)
         {
-            
             mock = new Mock<ILookupRepository>();
             util = new LookupUtilityService(mock.Object);
             var dictionary = new Dictionary<string, string>();
@@ -81,14 +80,6 @@ namespace BizTalkComponents.Utilities.LookupUtility.Test.UnitTest
         public void TestAgeListOK()
         {
             var ts = new TimeSpan(0, 30, 0);
-            util.GetValue(list, "ConfigKey", maxAge: ts);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
-        public void TestAgeListTooOld()
-        {
-            var ts = new TimeSpan(1, 30, 0);
             util.GetValue(list, "ConfigKey", maxAge: ts);
         }
     }

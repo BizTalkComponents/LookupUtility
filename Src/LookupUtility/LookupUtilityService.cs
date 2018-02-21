@@ -20,9 +20,9 @@ namespace BizTalkComponents.Utilities.LookupUtility
             _lookupRepository = lookupRepository;
         }
 
-        public string GetValue(string list, string key, string defaultValue)
+        public string GetValue(string list, string key, string defaultValue, TimeSpan maxAge = default(TimeSpan))
         {
-            var dict = GetList(list);
+            var dict = GetList(list, maxAge);
             string val;
             if (!dict.TryGetValue(key, out val))
             {
