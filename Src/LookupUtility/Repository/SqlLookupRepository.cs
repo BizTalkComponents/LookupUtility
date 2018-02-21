@@ -10,7 +10,7 @@ namespace BizTalkComponents.Utilities.LookupUtility.Repository
 {
     public class SqlLookupRepository : ILookupRepository
     {
-        public Dictionary<string, string> LoadList(string list)
+        public Dictionary<string, string> LoadList(string list, TimeSpan maxAge = default(TimeSpan))
         {
             string query = string.Format("SELECT [Key], Value FROM {0}", list);
 

@@ -10,15 +10,22 @@ namespace BizTalkComponents.Utilities.LookupUtility.Repository
 {
     public class SharepointLookupRepository : ILookupRepository
     {
-        public Dictionary<string, string> LoadList(string list)
+        Microsoft.SharePoint.Client.List spList;
+        ClientContext clientContext;
+
+        public SharepointLookupRepository()
         {
             var site = ConfigurationManager.AppSettings["SharePointSite"];
+            clientContext = new ClientContext(site);
 
-            ClientContext clientContext = new ClientContext(site);
-            Web oWebsite = clientContext.Web;
-            ListCollection collList = oWebsite.Lists;
+        }
 
-            var spList = collList.GetByTitle(list);
+        public Dictionary<string, string> LoadList(string list, TimeSpan maxAge = default(TimeSpan))
+        {
+            SetList(list);
+
+            if (maxAge != default(TimeSpan) && maxAge < GetAgeOfList(list))
+                spList.RefreshLoad();
 
             var q = new CamlQuery();
             ListItemCollection collListItem = spList.GetItems(q);
@@ -43,6 +50,18 @@ namespace BizTalkComponents.Utilities.LookupUtility.Repository
             }
 
             return dictionary;
+        }
+
+        private void SetList(string list)
+        {
+            Web oWebsite = clientContext.Web;
+            ListCollection collList = oWebsite.Lists;
+            spList = collList.GetByTitle(list);
+        }
+
+        private TimeSpan GetAgeOfList(string list)
+        {
+            return DateTime.Now.Subtract(spList.LastItemModifiedDate);
         }
     }
 }
