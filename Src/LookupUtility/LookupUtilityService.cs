@@ -32,9 +32,9 @@ namespace BizTalkComponents.Utilities.LookupUtility
             return val;
         }
 
-        public string GetValue(string list, string key, bool throwIfNotExists = false, bool allowDefaults = false)
+        public string GetValue(string list, string key, bool throwIfNotExists = false, bool allowDefaults = false, TimeSpan maxAge = default(TimeSpan))
         {
-            var dict = GetList(list);
+            var dict = GetList(list, maxAge);
             string val;
             if (!dict.TryGetValue(key, out val))
             {

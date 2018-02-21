@@ -22,21 +22,21 @@ namespace BizTalkComponents.Utilities.LookupUtility.Test.UnitTest
             var dictionary = new Dictionary<string, string>();
             dictionary.Add("ConfigKey", "ConfigValue");
             dictionary.Add("default", "DefaultValue");
-            mock.Setup(s => s.LoadList(list)).Returns(dictionary);
+            mock.Setup(s => s.LoadList(list, default(TimeSpan))).Returns(dictionary);
         }
 
         [TestMethod]
         public void TestHappyPath()
-            {
+        {
             Assert.AreEqual("ConfigValue", util.GetValue(list, "ConfigKey"));
-            mock.Verify(util => util.LoadList(list), Times.Once);
+            mock.Verify(_util => _util.LoadList(list, default(TimeSpan)), Times.Once);
         }
 
         [TestMethod]
         public void TestCache()
         {
             util.GetValue(list, "ConfigKey");
-            mock.Verify(util => util.LoadList(list), Times.Once);
+            mock.Verify(_util => _util.LoadList(list, default(TimeSpan)), Times.Once);
         }
 
         [TestMethod]
@@ -75,6 +75,21 @@ namespace BizTalkComponents.Utilities.LookupUtility.Test.UnitTest
         public void TestNonExistingList()
         {
             util.GetValue("NonExistingList", "ConfigKey");
+        }
+
+        [TestMethod]
+        public void TestAgeListOK()
+        {
+            var ts = new TimeSpan(0, 30, 0);
+            util.GetValue(list, "ConfigKey", maxAge: ts);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void TestAgeListTooOld()
+        {
+            var ts = new TimeSpan(1, 30, 0);
+            util.GetValue(list, "ConfigKey", maxAge: ts);
         }
     }
 }
