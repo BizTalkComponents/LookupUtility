@@ -20,9 +20,9 @@ namespace BizTalkComponents.Utilities.LookupUtility
             _lookupRepository = lookupRepository;
         }
 
-        public string GetValue(string list, string key, string defaultValue)
+        public string GetValue(string list, string key, string defaultValue, TimeSpan maxAge = default(TimeSpan))
         {
-            var dict = GetList(list);
+            var dict = GetList(list, maxAge);
             string val;
             if (!dict.TryGetValue(key, out val))
             {
@@ -32,9 +32,9 @@ namespace BizTalkComponents.Utilities.LookupUtility
             return val;
         }
 
-        public string GetValue(string list, string key, bool throwIfNotExists = false, bool allowDefaults = false)
+        public string GetValue(string list, string key, bool throwIfNotExists = false, bool allowDefaults = false, TimeSpan maxAge = default(TimeSpan))
         {
-            var dict = GetList(list);
+            var dict = GetList(list, maxAge);
             string val;
             if (!dict.TryGetValue(key, out val))
             {
@@ -54,13 +54,13 @@ namespace BizTalkComponents.Utilities.LookupUtility
             return val;
         }
 
-        private Dictionary<string, string> GetList(string list)
+        private Dictionary<string, string> GetList(string list, TimeSpan maxAge = default(TimeSpan))
         {
             var dict = new Dictionary<string, string>();
 
             if (!_lookupValues.TryGetValue(list, out dict))
             {
-                dict = _lookupRepository.LoadList(list);
+                dict = _lookupRepository.LoadList(list, maxAge);
 
                 if (dict == null)
                 {
