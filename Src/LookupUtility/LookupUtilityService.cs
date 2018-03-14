@@ -20,6 +20,11 @@ namespace BizTalkComponents.Utilities.LookupUtility
             _lookupRepository = lookupRepository;
         }
 
+        public string GetValue(string list, string key, string defaultValue, int maxAgeSeconds = -1)
+        {
+            return GetValue(list, key, defaultValue, maxAgeSeconds == -1 ? default(TimeSpan) : new TimeSpan(0, 0, maxAgeSeconds));
+        }
+
         public string GetValue(string list, string key, string defaultValue, TimeSpan maxAge = default(TimeSpan))
         {
             var dict = GetList(list, maxAge);
@@ -30,6 +35,11 @@ namespace BizTalkComponents.Utilities.LookupUtility
             }
 
             return val;
+        }
+
+        public string GetValue(string list, string key, bool throwIfNotExists = false, bool allowDefaults = false, int maxAgeSeconds = -1)
+        {
+            return GetValue(list, key, throwIfNotExists, allowDefaults, maxAgeSeconds == -1 ? default(TimeSpan) : new TimeSpan(0, 0, maxAgeSeconds));
         }
 
         public string GetValue(string list, string key, bool throwIfNotExists = false, bool allowDefaults = false, TimeSpan maxAge = default(TimeSpan))
