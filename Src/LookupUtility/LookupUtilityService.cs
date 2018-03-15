@@ -20,7 +20,7 @@ namespace BizTalkComponents.Utilities.LookupUtility
             _lookupRepository = lookupRepository;
         }
 
-        public string GetValue(string list, string key, string defaultValue, int maxAgeSeconds = -1)
+        public string GetValue(string list, string key, string defaultValue, int maxAgeSeconds)
         {
             return GetValue(list, key, defaultValue, maxAgeSeconds == -1 ? default(TimeSpan) : new TimeSpan(0, 0, maxAgeSeconds));
         }
@@ -37,7 +37,7 @@ namespace BizTalkComponents.Utilities.LookupUtility
             return val;
         }
 
-        public string GetValue(string list, string key, bool throwIfNotExists = false, bool allowDefaults = false, int maxAgeSeconds = -1)
+        public string GetValue(string list, string key, int maxAgeSeconds, bool throwIfNotExists = false, bool allowDefaults = false)
         {
             return GetValue(list, key, throwIfNotExists, allowDefaults, maxAgeSeconds == -1 ? default(TimeSpan) : new TimeSpan(0, 0, maxAgeSeconds));
         }
