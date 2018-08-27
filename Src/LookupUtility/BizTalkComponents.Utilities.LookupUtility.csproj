@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Application\IApplicationService.cs" />
+    <Compile Include="Application\MockApplicationService.cs" />
     <Compile Include="Application\SharePointApplicationService.cs" />
     <Compile Include="Application\SqlApplicationService.cs" />
     <Compile Include="Repository\ILookupRepository.cs" />
