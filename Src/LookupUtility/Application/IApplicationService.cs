@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BizTalkComponents.Utilities.LookupUtility.Application
 {
-    interface IApplicationService
+    public interface IApplicationService
     {
         string GetValue(string list, string key, bool throwIfNotExists = false, bool allowDefaults = false);
     }
