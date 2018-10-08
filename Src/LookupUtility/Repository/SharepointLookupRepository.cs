@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,13 +16,17 @@ namespace BizTalkComponents.Utilities.LookupUtility.Repository
 
         public SharepointLookupRepository()
         {
+            Trace.WriteLine("Initializing new Sharepoint repo");
             var site = ConfigurationManager.AppSettings["SharePointSite"];
+            Trace.WriteLine($"Site {site}");
             clientContext = new ClientContext(site);
+            Trace.WriteLine($"Got site {site}");
 
         }
 
         public Dictionary<string, string> LoadList(string list, TimeSpan maxAge = default(TimeSpan))
         {
+            Trace.WriteLine("Loading list");
             SetList(list);
 
             if (maxAge != default(TimeSpan) && maxAge < GetAgeOfList(list))
@@ -45,7 +50,7 @@ namespace BizTalkComponents.Utilities.LookupUtility.Repository
             {
                 item.FieldValues.TryGetValue("Key", out keyName);
                 item.FieldValues.TryGetValue("Value", out valueName);
-
+                Trace.WriteLine($"Populating list key {keyName.ToString()} value {valueName as string}");
                 dictionary.Add(keyName.ToString(), valueName as string);
             }
 
@@ -54,8 +59,10 @@ namespace BizTalkComponents.Utilities.LookupUtility.Repository
 
         private void SetList(string list)
         {
+            Trace.WriteLine($"Getting list {list}");
             Web oWebsite = clientContext.Web;
             ListCollection collList = oWebsite.Lists;
+            
             spList = collList.GetByTitle(list);
         }
 
