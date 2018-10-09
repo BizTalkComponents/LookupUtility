@@ -72,13 +72,11 @@ namespace BizTalkComponents.Utilities.LookupUtility
             if (!dict.TryGetValue(key, out val))
             {
                 
-                    throw new ArgumentException(string.Format("The specified property {0} does not exist in list {1}", key, list));
                 if (dict.TryGetValue(DEFAULT_KEY, out defaultValue))
                 {
                     return defaultValue;
                 }
-
-                return null;
+                throw new ArgumentException(string.Format("The specified property {0} does not exist in list {1}", key, list));
             }
 
             return val;
