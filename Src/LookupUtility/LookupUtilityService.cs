@@ -1,6 +1,7 @@
 ﻿using BizTalkComponents.Utilities.LookupUtility.Repository;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace BizTalkComponents.Utilities.LookupUtility
 {
@@ -64,8 +65,27 @@ namespace BizTalkComponents.Utilities.LookupUtility
             return val;
         }
 
+        public string GetValue(string list, string key, string defaultValue)
+        {
+            var dict = GetList(list, default(TimeSpan));
+            string val;
+            if (!dict.TryGetValue(key, out val))
+            {
+                
+                if (dict.TryGetValue(DEFAULT_KEY, out defaultValue))
+                {
+                    return defaultValue;
+                }
+                throw new ArgumentException(string.Format("The specified property {0} does not exist in list {1}", key, list));
+            }
+
+            return val;
+        }
+
+
         private Dictionary<string, string> GetList(string list, TimeSpan maxAge = default(TimeSpan))
         {
+            Trace.WriteLine($"Getting list {list}");
             var dict = new Dictionary<string, string>();
 
             if (!_lookupValues.TryGetValue(list, out dict))
