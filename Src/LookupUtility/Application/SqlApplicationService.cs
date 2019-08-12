@@ -11,14 +11,22 @@ namespace BizTalkComponents.Utilities.LookupUtility.Application
     public class SqlApplicationService : IApplicationService
     {
         private LookupUtilityService svc;
-
+        private bool initialized;
         public SqlApplicationService()
         {
-            svc = new LookupUtilityService(new SqlLookupRepository());
+            
+        }
+        public string SetConnection(string connection=default(string))
+        {
+            if (string.IsNullOrEmpty(connection)) connection = "SqlLookupRepository";
+            svc = new LookupUtilityService(new SqlLookupRepository(connection));
+            initialized = true;
+            return "success";
         }
 
         public string GetValue(string list, string key, bool throwIfNotExists = false, bool allowDefaults = false)
         {
+            if (!initialized) SetConnection();
             string value;
 
             try
@@ -36,6 +44,7 @@ namespace BizTalkComponents.Utilities.LookupUtility.Application
 
         public string GetValue(string list, string key, string defaultValue)
         {
+            if (!initialized) SetConnection();
             string value;
 
             try
@@ -49,6 +58,12 @@ namespace BizTalkComponents.Utilities.LookupUtility.Application
             }
 
             return value;
+        }
+
+        public System.Xml.XmlElement GetListAsXml(string list, bool throwIfNotExists = false)
+        {
+            if (!initialized) SetConnection();
+            return svc.GetListAsXml(list);
         }
     }
 }

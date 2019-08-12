@@ -1,6 +1,7 @@
 ﻿using BizTalkComponents.Utilities.LookupUtility.Repository;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Diagnostics;
 
 namespace BizTalkComponents.Utilities.LookupUtility
@@ -82,6 +83,26 @@ namespace BizTalkComponents.Utilities.LookupUtility
             return val;
         }
 
+        public System.Xml.XmlElement GetListAsXml(string list)
+        {
+            Trace.WriteLine($"Getting list {list}");
+            var dict = new Dictionary<string, string>();
+
+            if (!_lookupValues.TryGetValue(list, out dict))
+            {
+                dict = _lookupRepository.LoadList(list, default(TimeSpan));
+                if (dict == null)
+                {
+                    throw new ArgumentException("The list {0} does not exist.", list);
+                }
+                _lookupValues.Add(list, dict);
+            }
+            string xmlstr = $"<{list}>" + string.Join("", dict.Select(kv => $"<item key=\"{kv.Key}\">{kv.Value}</item>").ToArray()) + $"</{list}>";
+
+            System.Xml.XmlDocument doc = new System.Xml.XmlDocument();
+            doc.LoadXml(xmlstr);
+            return doc.DocumentElement;
+        }
 
         private Dictionary<string, string> GetList(string list, TimeSpan maxAge = default(TimeSpan))
         {

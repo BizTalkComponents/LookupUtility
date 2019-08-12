@@ -47,13 +47,13 @@ namespace BizTalkComponents.Utilities.LookupUtility.Test.UnitTest
         [TestMethod]
         public void TestListDefaultValue()
         {
-            Assert.AreEqual("DefaultValue", util.GetValue(list, "NonExistingConfigKey",false,true));
+            Assert.AreEqual("DefaultValue", util.GetValue(list, "NonExistingConfigKey", false, true));
         }
 
         [TestMethod]
         public void TestNonExistingWithDefaultValue()
         {
-            Assert.AreEqual("DefaultValue", util.GetValue(list, "NonExistingConfigKey","DefaultValue"));
+            Assert.AreEqual("DefaultValue", util.GetValue(list, "NonExistingConfigKey", "DefaultValue"));
         }
 
         [TestMethod]
@@ -81,6 +81,12 @@ namespace BizTalkComponents.Utilities.LookupUtility.Test.UnitTest
         {
             var ts = new TimeSpan(0, 30, 0);
             util.GetValue(list, "ConfigKey", maxAge: ts);
+        }
+
+        [TestMethod]
+        public void TestGetListAsXml()
+        {
+            var elm = util.GetListAsXml(list);
         }
     }
 }
