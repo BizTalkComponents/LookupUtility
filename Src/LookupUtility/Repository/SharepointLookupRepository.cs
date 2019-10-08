@@ -14,14 +14,13 @@ namespace BizTalkComponents.Utilities.LookupUtility.Repository
         Microsoft.SharePoint.Client.List spList;
         ClientContext clientContext;
 
-        public SharepointLookupRepository()
+        public SharepointLookupRepository(string connection)
         {
             Trace.WriteLine("Initializing new Sharepoint repo");
-            var site = ConfigurationManager.AppSettings["SharePointSite"];
+            var site = ConfigurationManager.AppSettings[connection];
             Trace.WriteLine($"Site {site}");
             clientContext = new ClientContext(site);
             Trace.WriteLine($"Got site {site}");
-
         }
 
         public Dictionary<string, string> LoadList(string list, TimeSpan maxAge = default(TimeSpan))

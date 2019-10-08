@@ -10,11 +10,16 @@ namespace BizTalkComponents.Utilities.LookupUtility.Repository
 {
     public class SqlLookupRepository : ILookupRepository
     {
+        private string connectionString;
+        public SqlLookupRepository(string connection)
+        {
+            connectionString = ConfigurationManager.ConnectionStrings[connection].ConnectionString;
+        }
         public Dictionary<string, string> LoadList(string list, TimeSpan maxAge = default(TimeSpan))
         {
             string query = string.Format("SELECT [Key], Value FROM {0}", list);
 
-            var connectionString = ConfigurationManager.ConnectionStrings["SqlLookupRepository"].ConnectionString;
+            
             var dictionary = new Dictionary<string, string>();
 
             using (var con = new SqlConnection(connectionString))
